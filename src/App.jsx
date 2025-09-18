@@ -22,16 +22,17 @@ const App = () => {
   const onSearchChange = (event) => {
     const searchString = event.target.value.toLowerCase();
     const newFilteredMonsters = monsters.filter((monster) => 
-      monster.name.toLowercase().includes(searchString)
+      monster.name.toLowerCase().includes(searchString)
     );
     setFilteredMonsters(newFilteredMonsters);
   };
 
   return (
-    <>
+    <div className="app-container">
+      <h1 className="app-title">Monsters Rolodex</h1>
       <SearchBar onChangeHandler={onSearchChange} />
       <CardList monsters={filteredMonsters} />
-    </>
+    </div>
   );
 };
 
