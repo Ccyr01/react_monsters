@@ -1,43 +1,18 @@
-name: Azure Static Web Apps CI/CD
+>>
+PS C:\Users\19159\Desktop\React\monsters-rolodex> git add .github/workflows/azure-static-web-apps.yml
+>> git commit -m "Switch to pre-build workflow for Azure"
+>> git push
+>> 
+fatal: pathspec '.github/workflows/azure-static-web-apps.yml' did not match any files
+On branch master
+Your branch is up to date with 'origin/master'.
 
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   .github/workflows/azure-static-web-apps-calm-bush-0702d2210.yml
+        modified:   package.json
 
-jobs:
-  build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
-    runs-on: ubuntu-latest
-    name: Build and Deploy Job
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
-          lfs: false
-      - name: Build And Deploy
-        id: builddeploy
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_CALM_BUSH_0702D2210 }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          action: "upload"
-          app_location: "/" # App source code path
-          api_location: ""  # Optional
-          output_location: "dist" # ✅ Vite outputs here
-
-  close_pull_request_job:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    runs-on: ubuntu-latest
-    name: Close Pull Request Job
-    steps:
-      - name: Close Pull Request
-        id: closepullrequest
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_CALM_BUSH_0702D2210 }}
-          action: "close"
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+PS C:\Users\19159\Desktop\React\monsters-rolodex>
