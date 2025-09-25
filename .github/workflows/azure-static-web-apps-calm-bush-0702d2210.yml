@@ -23,6 +23,10 @@ jobs:
       - name: Build app
         run: yarn build
 
+      # ✅ Copy config file into dist/
+      - name: Copy staticwebapp.config.json
+        run: cp staticwebapp.config.json dist/
+
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
