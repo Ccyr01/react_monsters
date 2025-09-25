@@ -12,6 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      # Install dependencies and build with Node 20
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -23,16 +24,17 @@ jobs:
       - name: Build app
         run: yarn build
 
-      # ✅ Copy config file into dist/
-      - name: Copy staticwebapp.config.json
-        run: cp staticwebapp.config.json dist/
+      # Copy staticwebapp.config.json into dist before deploying
+      - name: Copy config
+        run: cp staticwebapp.config.json dist/ || echo "no config file"
 
+      # Upload the dist folder directly (skip Oryx build)
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_CALM_BUSH_0702D2210 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          action: upload
-          app_location: "/"
-          output_location: "dist"
+          action: "upload"
+          app_location: "dist"
+          output_location: ""
           skip_app_build: true
